@@ -1,0 +1,73 @@
+{%  extends 'base.html' %}
+{% block content %}
+  
+
+
+<div class="jumbotron">
+        <h1 class="display-4">Hey People</h1>
+        <p class="lead">news people news</p>
+        <hr class="my-4">
+       
+        <a class="btn btn-secondary" href="#" role="button">Learn more</a>
+      </div>
+<br>
+<br>
+
+<table class="table table-dark table-hover table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">24h high</th>
+            <th scope="col">24h low</th>
+            <th scope="col">market cap</th>
+          </tr>
+        </thead>
+
+
+{% for key,value in price.DISPLAY.items %}
+   
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>{{key}}</td>
+                <td>{{value.USD.PRICE}}</td>
+                <td>{{value.USD.HIGHDAY}}</td>
+                <td>{{value.USD.LOWDAY}}</td>
+                <td>{{value.USD.MKTCAP}}</td>
+              </tr>
+              
+{% endfor %}
+</tbody>
+</table>
+
+
+
+
+<div class='container'>
+    <div class="row">
+            {% for x in api.Data %}
+            <div class='col-sm'>
+                <div class="card" style="width: 18rem;">
+                        <img src="{{ x.imageurl}}", class="card-img-top" alt="{{ x.source }}">
+                        <div class="card-body">
+                        <h5 class="card-title">{{ x.title }}</h5>
+                        <p class="card-text">{{  x.body }}</p>
+                        <a href="{{ x.url }}" class="btn btn-secondary">Read More</a>
+                        </div>
+                    </div>
+                    <br>
+            </div>
+      {% endfor %}
+    </div>
+ </div>
+
+<ul>
+    {% for x in api.Data %}
+        <li>{{ x.title }}</li>
+    {% endfor %}
+</ul>
+
+{{ api.Data }}
+{% endblock %}
